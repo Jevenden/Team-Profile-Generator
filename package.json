@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "tpg",
   "version": "1.0.0",
   "description": "",
@@ -13,6 +14,5 @@
     "fs": "^0.0.1-security",
     "inquirer": "^9.0.1",
     "jest": "^28.1.3"
-  },
-  "type": "module"
+  }
 }

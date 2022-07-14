@@ -1,10 +1,10 @@
 import inquirer from "inquirer";
-import fs from "fs";
-import engineer from "./lib/engineer";
-import intern from "./lib/intern";
-import manager from "./lib/manager";
+// import fs from "fs";
+import engineer from "./lib/engineer.js";
+import intern from "./lib/intern.js";
+import manager from "./lib/Manager.js";
 
-const newStaff = [];
+let newStaff = [];
 
 const basicQuestions = async () => {
   const basicAnswers = await inquirer.prompt([
@@ -24,13 +24,13 @@ const basicQuestions = async () => {
       name: "email",
     },
     {
-      type: "checkbox",
+      type: "list",
       message: "What is your new role on the team?",
       name: "role",
       choices: ["Manager", "Engineer", "Intern"],
     },
   ]);
-  if (answers.role === Manager) {
+  if (basicAnswers.role === "Manager") {
     const managerAnswers = await inquirer.prompt([
       {
         type: "input",
@@ -38,19 +38,34 @@ const basicQuestions = async () => {
         name: "officeNumber",
       },
     ]);
+
+    const newManager = new manager(
+      basicAnswers.name,
+      basicAnswers.id,
+      basicAnswers.email,
+      managerAnswers.officeNumber
+    );
+    newStaff.push(newManager);
   }
 
-  if (answers.role === Engineer) {
+  if (basicAnswers.role === "Engineer") {
     const engineerAnswers = await inquirer.prompt([
       {
         type: "input",
         message: "What is your github username?",
-        name: "gitUse",
+        name: "github",
       },
     ]);
+    const newEngineer = new engineer(
+      basicAnswers.name,
+      basicAnswers.id,
+      basicAnswers.email,
+      engineerAnswers.github
+    );
+    newStaff.push(newEngineer);
   }
 
-  if (answers.role === Intern) {
+  if (basicAnswers.role === "Intern") {
     const internAnswers = await inquirer.prompt([
       {
         type: "input",
@@ -58,6 +73,14 @@ const basicQuestions = async () => {
         name: "school",
       },
     ]);
+
+    const newIntern = new intern(
+      basicAnswers.name,
+      basicAnswers.id,
+      basicAnswers.email,
+      internAnswers.school
+    );
+    newStaff.push(newIntern);
   }
 };
 
