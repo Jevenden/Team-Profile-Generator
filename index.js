@@ -35,7 +35,7 @@ const basicQuestions = async () => {
       {
         type: "input",
         message: "What is your office number?",
-        name: "Onum",
+        name: "officeNumber",
       },
     ]);
   }
