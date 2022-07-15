@@ -1,9 +1,10 @@
 import inquirer from "inquirer";
-// import fs from "fs";
-// import Employee from "./lib/Employee.js";
-import manager from "./lib/Manager.js";
-import engineer from "./lib/engineer.js";
-import intern from "./lib/intern.js";
+import fs from "fs";
+import createTeam from "./src/template.js";
+import Manager from "./lib/Manager.js";
+import Engineer from "./lib/engineer.js";
+import Intern from "./lib/intern.js";
+import employee from "./lib/Employee.js";
 
 let newStaff = [];
 
@@ -86,7 +87,7 @@ const basicQuestions = async () => {
     },
   ]);
   if (basicAnswers.role === "Manager") {
-    const newManager = new manager(
+    let newManager = new Manager(
       basicAnswers.name,
       basicAnswers.id,
       basicAnswers.email,
@@ -94,7 +95,7 @@ const basicQuestions = async () => {
     );
     newStaff.push(newManager);
   } else if (basicAnswers.role === "Engineer") {
-    const newEngineer = new engineer(
+    let newEngineer = new Engineer(
       basicAnswers.name,
       basicAnswers.id,
       basicAnswers.email,
@@ -102,7 +103,7 @@ const basicQuestions = async () => {
     );
     newStaff.push(newEngineer);
   } else {
-    const newIntern = new intern(
+    let newIntern = new Intern(
       basicAnswers.name,
       basicAnswers.id,
       basicAnswers.email,
@@ -127,13 +128,12 @@ async function startQuestions() {
   if (nextStep.newMember === "Add new team member") {
     return startQuestions();
   } else {
-    console.log("Good fuckin' job! Go get a drink, you sexy bitch!");
+    return avengersAssemble();
   }
-  // .then((data) => {
-  //   const response = generateMarkdown(data);
-  //   makeReadme(response);
-  // })
-  // .catch((err) => console.log(err));
+}
+
+function avengersAssemble() {
+  fs.writeFileSync("./dist/index.html", createTeam(newStaff), "utf-8");
 }
 
 // // Function call to initialize app
