@@ -1,8 +1,8 @@
 import inquirer from "inquirer";
 // import fs from "fs";
+import manager from "./lib/Manager.js";
 import engineer from "./lib/engineer.js";
 import intern from "./lib/intern.js";
-import manager from "./lib/Manager.js";
 
 let newStaff = [];
 
@@ -12,16 +12,34 @@ const basicQuestions = async () => {
       type: "input",
       message: "What is your name?",
       name: "name",
+      validate: function (answer) {
+        if (answer.length < 1) {
+          return console.log("Please enter your name.");
+        }
+        return true;
+      },
     },
     {
       type: "input",
       message: "What is your ID number?",
       name: "id",
+      validate: function (answer) {
+        if (answer.length < 1) {
+          return console.log("Please enter a valid ID number.");
+        }
+        return true;
+      },
     },
     {
       type: "input",
       message: "What is your email address?",
       name: "email",
+      validate: function (answer) {
+        if (answer.length < 1) {
+          return console.log("Please enter a valid email address.");
+        }
+        return true;
+      },
     },
     {
       type: "list",
@@ -36,6 +54,12 @@ const basicQuestions = async () => {
         type: "input",
         message: "What is your office number?",
         name: "officeNumber",
+        validate: function (answer) {
+          if (answer.length < 1) {
+            return console.log("Please enter a valid office number.");
+          }
+          return true;
+        },
       },
     ]);
 
@@ -54,6 +78,12 @@ const basicQuestions = async () => {
         type: "input",
         message: "What is your github username?",
         name: "github",
+        validate: function (answer) {
+          if (answer.length < 1) {
+            return console.log("Please enter a valid github username.");
+          }
+          return true;
+        },
       },
     ]);
     const newEngineer = new engineer(
@@ -71,6 +101,12 @@ const basicQuestions = async () => {
         type: "input",
         message: "What is your school name?",
         name: "school",
+        validate: function (answer) {
+          if (answer.length < 1) {
+            return console.log("Please enter a valid school name.");
+          }
+          return true;
+        },
       },
     ]);
 
