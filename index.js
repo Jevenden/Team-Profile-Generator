@@ -120,6 +120,10 @@ const basicQuestions = async () => {
   }
 };
 
+// async function nextStep() {
+//   await basicQuestions();
+// }
+
 // function makeReadme(data) {
 //   writeFile("./completed READMEs/README.md", data, (err) =>
 //     err
@@ -132,6 +136,21 @@ const basicQuestions = async () => {
 
 async function startQuestions() {
   await basicQuestions();
+
+  const nextStep = await inquirer.prompt([
+    {
+      name: "newMember",
+      type: "list",
+      choices: ["Add new team member", "Create team"],
+      message: "What would you like to do next?",
+    },
+  ]);
+
+  if (nextStep.newMember === "Add new team member") {
+    return startQuestions();
+  } else {
+    console.log("Yer done for tonight!");
+  }
   // .then((data) => {
   //   const response = generateMarkdown(data);
   //   makeReadme(response);
