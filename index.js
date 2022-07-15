@@ -1,5 +1,6 @@
 import inquirer from "inquirer";
 // import fs from "fs";
+// import Employee from "./lib/Employee.js";
 import manager from "./lib/Manager.js";
 import engineer from "./lib/engineer.js";
 import intern from "./lib/intern.js";
@@ -47,92 +48,69 @@ const basicQuestions = async () => {
       name: "role",
       choices: ["Manager", "Engineer", "Intern"],
     },
+    {
+      type: "input",
+      message: "What is your office number?",
+      name: "officeNumber",
+      when: ({ role }) => role == "Manager",
+      validate: function (answer) {
+        if (answer.length < 1) {
+          return console.log("Please enter a valid office number.");
+        }
+        return true;
+      },
+    },
+    {
+      type: "input",
+      message: "What is your github username?",
+      name: "gitHub",
+      when: ({ role }) => role == "Engineer",
+      validate: function (answer) {
+        if (answer.length < 1) {
+          return console.log("Please enter a valid github username.");
+        }
+        return true;
+      },
+    },
+    {
+      type: "input",
+      message: "What is the name of your school?",
+      name: "school",
+      when: ({ role }) => role == "Intern",
+      validate: function (answer) {
+        if (answer.length < 1) {
+          return console.log("Please enter a valid school name.");
+        }
+        return true;
+      },
+    },
   ]);
   if (basicAnswers.role === "Manager") {
-    const managerAnswers = await inquirer.prompt([
-      {
-        type: "input",
-        message: "What is your office number?",
-        name: "officeNumber",
-        validate: function (answer) {
-          if (answer.length < 1) {
-            return console.log("Please enter a valid office number.");
-          }
-          return true;
-        },
-      },
-    ]);
-
     const newManager = new manager(
       basicAnswers.name,
       basicAnswers.id,
       basicAnswers.email,
-      managerAnswers.officeNumber
+      basicAnswers.officeNumber
     );
     newStaff.push(newManager);
-  }
-
-  if (basicAnswers.role === "Engineer") {
-    const engineerAnswers = await inquirer.prompt([
-      {
-        type: "input",
-        message: "What is your github username?",
-        name: "github",
-        validate: function (answer) {
-          if (answer.length < 1) {
-            return console.log("Please enter a valid github username.");
-          }
-          return true;
-        },
-      },
-    ]);
+  } else if (basicAnswers.role === "Engineer") {
     const newEngineer = new engineer(
       basicAnswers.name,
       basicAnswers.id,
       basicAnswers.email,
-      engineerAnswers.github
+      basicAnswers.gitHub
     );
     newStaff.push(newEngineer);
-  }
-
-  if (basicAnswers.role === "Intern") {
-    const internAnswers = await inquirer.prompt([
-      {
-        type: "input",
-        message: "What is your school name?",
-        name: "school",
-        validate: function (answer) {
-          if (answer.length < 1) {
-            return console.log("Please enter a valid school name.");
-          }
-          return true;
-        },
-      },
-    ]);
-
+  } else {
     const newIntern = new intern(
       basicAnswers.name,
       basicAnswers.id,
       basicAnswers.email,
-      internAnswers.school
+      basicAnswers.school
     );
     newStaff.push(newIntern);
   }
 };
-
-// async function nextStep() {
-//   await basicQuestions();
-// }
-
-// function makeReadme(data) {
-//   writeFile("./completed READMEs/README.md", data, (err) =>
-//     err
-//       ? console.log(err)
-//       : console.log(
-//           "Success! Your README can be found in the Completed READMEs folder!"
-//         )
-//   );
-// }
 
 async function startQuestions() {
   await basicQuestions();
@@ -149,7 +127,7 @@ async function startQuestions() {
   if (nextStep.newMember === "Add new team member") {
     return startQuestions();
   } else {
-    console.log("Yer done for tonight!");
+    console.log("Good fuckin' job! Go get a drink, you sexy bitch!");
   }
   // .then((data) => {
   //   const response = generateMarkdown(data);
