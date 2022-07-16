@@ -4,7 +4,7 @@ import createTeam from "./src/template.js";
 import Manager from "./lib/Manager.js";
 import Engineer from "./lib/engineer.js";
 import Intern from "./lib/intern.js";
-import employee from "./lib/Employee.js";
+// import employee from "./lib/Employee.js";
 
 let newStaff = [];
 
