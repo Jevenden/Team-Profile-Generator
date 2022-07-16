@@ -1,0 +1,25 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main, body {
+    background-color: lightgrey;
+}
+
+p, h4 {
+    color: black;
+    border-style: solid;
+    border-color: #7c7c7c;
+    background-color: #FFF;
+}
+
+h1 {
+    margin-bottom: 5%;
+}
+
+.employee-card {
+    padding-bottom: 2%;
+    border-radius: 5%;
+    border-style: solid;
+    border-color: #7c7c7c;
+}

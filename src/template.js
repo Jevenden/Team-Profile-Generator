@@ -1,13 +1,23 @@
-// import Manager from "../lib/Manager";
-
 export default function createTeam(newStaff) {
   let mainHTML = "";
   for (let i = 0; i < newStaff.length; i++) {
-    mainHTML += `<div class="employee-card">
-    <h2 class = "employee-header">${newStaff[i].name}</h2>
-    <p class = "detail-item">${newStaff[i].id}</p>
-    <p class = "detail-item">${newStaff[i].email}</p>
+    mainHTML += `
+    <div class="col-3 employee-card text-white bg-primary mb-3">
+    <div class="card-header text-center text-white"><h4>${newStaff[
+      i
+    ].getRole()}</h4></div>
+    <h5 class="card-title">Name: ${newStaff[i].name}</h5>
+    <p class="card-text">ID#: ${newStaff[i].id}</p>
+    <p class="card-text">Email: ${newStaff[i].email}</p>
     `;
+    let role = newStaff[i].getRole();
+    if (role === "Manager") {
+      mainHTML += `<p class="card-text">Work Phone: ${newStaff[i].officeNumber}</p></div><div class=col-1></div>`;
+    } else if (role === "Engineer") {
+      mainHTML += `<p class="card-text">Github: ${newStaff[i].github}</p></div><div class=col-1></div>`;
+    } else {
+      mainHTML += `<p class="card-text">School: ${newStaff[i].school}</p></div><div class=col-1></div>`;
+    }
   }
 
   return `<!DOCTYPE html>
@@ -30,9 +40,9 @@ export default function createTeam(newStaff) {
           <h1 class="display-3 text-center">Team Profile</h1>
         </header>
         <main>
-          <div class="container-fluid">
+          <div class="container">
             <div class="row">
-              <div class="teamArea col-12 d-flex justify-content-center">${mainHTML}</div>
+            ${mainHTML}
             </div>
           </div>
         </main>

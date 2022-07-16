@@ -4,7 +4,6 @@ import createTeam from "./src/template.js";
 import Manager from "./lib/Manager.js";
 import Engineer from "./lib/engineer.js";
 import Intern from "./lib/intern.js";
-// import employee from "./lib/Employee.js";
 
 let newStaff = [];
 
@@ -51,7 +50,7 @@ const basicQuestions = async () => {
     },
     {
       type: "input",
-      message: "What is your office number?",
+      message: "What is your office phone number?",
       name: "officeNumber",
       when: ({ role }) => role == "Manager",
       validate: function (answer) {
@@ -64,7 +63,7 @@ const basicQuestions = async () => {
     {
       type: "input",
       message: "What is your github username?",
-      name: "gitHub",
+      name: "github",
       when: ({ role }) => role == "Engineer",
       validate: function (answer) {
         if (answer.length < 1) {
@@ -99,7 +98,7 @@ const basicQuestions = async () => {
       basicAnswers.name,
       basicAnswers.id,
       basicAnswers.email,
-      basicAnswers.gitHub
+      basicAnswers.github
     );
     newStaff.push(newEngineer);
   } else {
