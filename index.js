@@ -139,6 +139,7 @@ async function startQuestions() {
 // Function to route user info and create the HTML file
 function makeTeam() {
   fs.writeFileSync("./dist/index.html", createTeam(newStaff), "utf-8");
+  console.log("Your team profile page has been created!");
 }
 
 // // Function call to initialize the app
