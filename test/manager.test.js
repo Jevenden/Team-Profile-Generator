@@ -1,3 +1,4 @@
+// Manager tests
 import Manager from "../lib/manager.js";
 
 test("Can set office number via constructor argument", () => {

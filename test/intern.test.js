@@ -1,3 +1,4 @@
+// Intern tests
 import Intern from "../lib/Intern.js";
 
 test("Can set school via constructor", () => {

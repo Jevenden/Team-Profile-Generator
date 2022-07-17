@@ -1,3 +1,4 @@
+// Required imports
 import inquirer from "inquirer";
 import fs from "fs";
 import createTeam from "./src/template.js";
@@ -5,8 +6,10 @@ import Manager from "./lib/Manager.js";
 import Engineer from "./lib/engineer.js";
 import Intern from "./lib/intern.js";
 
+// Variable to contain the new staff once created
 let newStaff = [];
 
+// Inquirer questions
 const basicQuestions = async () => {
   const basicAnswers = await inquirer.prompt([
     {
@@ -112,6 +115,8 @@ const basicQuestions = async () => {
   }
 };
 
+// Function to initialize the questions and give the option to add more
+// team members or complete the input and create the HTML
 async function startQuestions() {
   await basicQuestions();
 
@@ -127,13 +132,14 @@ async function startQuestions() {
   if (nextStep.newMember === "Add new team member") {
     return startQuestions();
   } else {
-    return avengersAssemble();
+    return makeTeam();
   }
 }
 
-function avengersAssemble() {
+// Function to route user info and create the HTML file
+function makeTeam() {
   fs.writeFileSync("./dist/index.html", createTeam(newStaff), "utf-8");
 }
 
-// // Function call to initialize app
+// // Function call to initialize the app
 startQuestions();

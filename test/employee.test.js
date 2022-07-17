@@ -1,3 +1,4 @@
+// Employee tests
 import Employee from "../lib/Employee.js";
 
 test("Can instantiate Employee instance", () => {
